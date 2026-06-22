@@ -17,9 +17,13 @@ These assumptions are draft and must be validated by Finance and leadership befo
 
 ## For sales people (no install needed)
 
-Open [`standalone.html`](standalone.html) directly in any web browser — double-click the file, or host it on an internal page / GitHub Pages. It is a single, self-contained file with no build step, install or internet connection required, and produces the same results as the app below.
+Use the hosted calculator: **https://splinters1974.github.io/Sales-commission-calculator/**
+
+Or open [`index.html`](index.html) directly in any web browser — double-click the file, or host it on an internal page. It is a single, self-contained file with no build step, install or internet connection required, and produces the same results as the developer app below. (`standalone.html` is kept as a redirect to it so older links keep working.)
 
 ## Running locally (developers)
+
+The React/TypeScript version is entered from `app.html`:
 
 ```bash
 npm install
@@ -40,7 +44,7 @@ npm run build
 
 ## Governance note
 
-All commission rules are stored in `src/commissionRules.ts` (and mirrored in `standalone.html`). Any change to thresholds, rates or payment split should be made in both places through a pull request and approved by the relevant business owner and Finance.
+All commission rules are stored in `src/commissionRules.ts` (and mirrored in `index.html`). Any change to thresholds, rates or payment split should be made in both places through a pull request and approved by the relevant business owner and Finance.
 
 ## Disclaimer
 
