@@ -1,0 +1,53 @@
+name: Deploy calculator to GitHub Pages
+
+# Publishes the self-contained standalone.html as the site root so sales
+# people can use the calculator from a shareable URL. The standalone file has
+# no external asset paths, so it works correctly at any Pages URL.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - standalone.html
+      - .github/workflows/deploy-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; don't cancel an in-progress run.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp standalone.html _site/index.html
+          cp standalone.html _site/standalone.html
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
